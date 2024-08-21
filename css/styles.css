@@ -5993,14 +5993,23 @@ textarea.form-control-lg {
 }
 
 .carousel-inner {
-  position: relative;
-  width: 100%;
+  display: flex;
   overflow: hidden;
+  position: relative;
 }
-.carousel-inner::after {
-  display: block;
-  clear: both;
-  content: "";
+
+.carousel-inner .col-md-4 {
+  flex: 0 0 33.33%; /* Mantém o tamanho fixo das colunas */
+  max-width: 33.33%; /* Impede que a largura varie */
+  transition: transform 0.8s ease-in-out;
+}
+
+.carousel-inner img {
+  width: 100% !important; /* Garante que a imagem ocupe 100% da coluna */
+  height: auto; /* Mantém a proporção original da imagem */
+  object-fit: cover; /* Corta a imagem para encaixá-la na coluna, se necessário */
+  transition: transform 0.8s ease-in-out;
+  padding: 0px !important;
 }
 
 .carousel-item {
@@ -6011,7 +6020,7 @@ textarea.form-control-lg {
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 1s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .carousel-item {
@@ -6025,16 +6034,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-/* rtl:begin:ignore */
-.carousel-item-next:not(.carousel-item-start),
-.active.carousel-item-end {
-  transform: translateX(100%);
-}
 
-.carousel-item-prev:not(.carousel-item-end),
-.active.carousel-item-start {
-  transform: translateX(-100%);
-}
 
 /* rtl:end:ignore */
 .carousel-fade .carousel-item {
@@ -11781,3 +11781,103 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.carousel-inner img {
+  object-fit: cover; /* Mantém a imagem centralizada e cortada para caber */
+  height: 300px; /* Altura consistente para todas as imagens */
+}
+
+.carousel-item {
+  transition: transform 0.6s ease; /* Transição suave */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo para melhor visibilidade */
+  border-radius: 50%;
+}
+
+/* rtl:begin:ignore */
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+  transform: translateX(33.333333%);
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+  transform: translateX(-33.333333%);
+}
+
+/* Estilo básico do carrossel */
+.carousel-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* Controle de altura das imagens */
+.carousel-item img {
+  object-fit: cover;
+  height: 300px;
+  width: auto;
+}
+
+/* Estilo para garantir espaçamento entre colunas */
+.carousel-item .row {
+  margin: 0;
+}
+
+/* Controle responsivo para diferentes tamanhos de tela */
+@media (max-width: 575.98px) {
+  /* 1 item por slide para telas menores */
+  .carousel-item .col-12 {
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+
+  /* rtl:begin:ignore */
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+  transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+  transform: translateX(-100%);
+}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* 2 itens por slide para telas médias */
+  .carousel-item .col-sm-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+  /* rtl:begin:ignore */
+  .carousel-item-next:not(.carousel-item-start),
+  .active.carousel-item-end {
+    transform: translateX(50%);
+  }
+
+  .carousel-item-prev:not(.carousel-item-end),
+  .active.carousel-item-start {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+  /* 3 itens por slide para telas maiores */
+  .carousel-item .col-md-4 {
+      flex: 0 0 33.33%;
+      max-width: 33.33%;
+  }
+}
+
+/* Adiciona espaçamento entre as colunas */
+.carousel-item .col {
+  padding: 0 15px; /* Espaçamento lateral entre as colunas */
+}
+
+/* Para controlar a altura do carrossel se necessário */
+.carousel-inner {
+  height: auto; /* Ajusta a altura com base nas imagens */
+}
