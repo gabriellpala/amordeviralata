@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    const host = 'http://localhost';
+    const host = 'http://localhost/admin';
     const apiURL = `${host}/api/carousel.php`;
 
     let imagesSaved = [];

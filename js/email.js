@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('contactForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        const host = 'http://localhost/';
+        const host = 'http://localhost/admin';
         const apiURL = host + 'api/email.php';
 
         // Coleta os dados do formulário
